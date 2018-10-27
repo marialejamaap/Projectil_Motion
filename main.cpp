@@ -11,13 +11,13 @@ double const rho=1.225;// densidad del aire
 double resistance_k (double a, double b); // función para hallar la k que determina la fricción que se presenta en el proyectil
 double Position_X(double v, double w, double x, double y, double z);// Función para determinar la posición en X en cierto tiempo t
  double Position_Y(double v, double w, double x, double y, double z);// Función para determinar la posición en Y en cierto tiempo t
-
  double angle_1(double a);// función para pasar el angulo a radianes
 
+ void Print_Position(double v, double w, double x, double y);
 int main()
 {
 
-   double angle1,angle, mass, cd,diameter,velocity_init, Xpos,Ypos, rest_k;// Declaración de variables
+   double angle1,angle, mass, cd,diameter,velocity_init,rest_k;// Declaración de variables
    /* angle1= el ángulo en radianes
       angle= ángulo que ingresa el usuario
       mass= La masa del proyectil
@@ -39,29 +39,15 @@ por eso queda a decisión del usuario(por lo general es 0.5 para las esferas)
     rest_k=resistance_k(cd,diameter);// rest_k toma el valor que retorna la función resistance_k
     angle1=angle_1(angle);// El ángulo ya en radianes
     cout<<"The value of K is:"<< rest_k<<endl<<endl; // Imprimir el valor de k para comparar con los resultados escritos
-
- double t=0.0;
- cout<<"Time"<<"\t"<<"X"<<"\t"<<"Y"<<endl;
-    for (int i=0;i<70;i++){
-Sleep(1000);//Muestra la progresión del proyectil pero definida con el tiempo t=t+0.1
-   Xpos= Position_X(rest_k,mass,velocity_init,angle1,t);// Se asigna a la variable Xpos el valor que retorna la función Position_X
-                                                        // El valor que retorna es la posición en X del proyectil
-   Ypos=Position_Y(rest_k,mass,velocity_init,angle1,t); // Se asigna a la variable Ypos el valor que retorna la función Position_X
-                                                      // El valor que retorna es la posición en Y del proyectil
-   if (Ypos<0.0 && t>0.0)// if para que los valores de posición de Y no sean inferiores al piso(cuando Y<0)
-       break;
-   else
-
-   cout<<t<<"\t"<< Xpos<<"\t"<< Ypos<<endl; // Imprimir la posición en x y en y en cierto tiempo t, observar que caada variable
-                                    // solo queda dependiendo del tiempo
-t=t+0.1;//aumentar el tiempo cada 0.1 según el tiempo va dando la posición en X y Y 
-    }
-
+Print_Position(rest_k,mass,velocity_init,angle1);
 
 
     getch();// Presionar para continuar
     return 0; // Retorna un cero a función main, que retorna un entero -> Indica que el programa a finalizado correctamente
 }
+
+
+
 double angle_1(double a){ // Función que convierte el ángulo ingresado por el usuario a un ángulo en rad para poder ser operado
                            // por las posteriores funciones,
 return (a*PI/180);  // Fórmula para pasar angúlo a radianes (Recibe como argumento el ángulo del usuario)
@@ -91,3 +77,22 @@ c=(w/v);
 Y=(c)*(x*(sin(y))+(c*g))*(1-(exp(b*z)))-(c*g*z);//Fórmula para hallar posición en Y con resistencia en el aire
 return Y;
 }
+
+void Print_Position(double v, double w, double x, double y){
+    double Xpos,Ypos;
+    double t=0.0;
+    cout<<"Time"<<"\t"<<"X"<<"\t"<<"Y"<<endl;
+       for (int i=0;i<70;i++){
+   Sleep(1000);
+      Xpos= Position_X(v,w,x,y,t);// Se asigna a la variable Xpos el valor que retorna la función Position_X
+                                                           // El valor que retorna es la posición en X del proyectil
+      Ypos=Position_Y(v,w,x,y,t); // Se asigna a la variable Ypos el valor que retorna la función Position_X
+                                                         // El valor que retorna es la posición en Y del proyectil
+      if (Ypos<=0.0 && t>0.0)// if para que los valores de posición de Y no sean inferiores al piso(cuando Y<0)
+          break;
+      else
+
+      cout<<t<<"\t"<< Xpos<<"\t"<< Ypos<<endl; // Imprimir la posición en x y en y en cierto tiempo t, observar que caada variable
+                                       // solo queda dependiendo del tiempo
+   t=t+0.1;//aumentar el tiempo cada 0.1 según el tiempo va dando la posición en X y Y
+}}
