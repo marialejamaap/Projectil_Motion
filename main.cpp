@@ -13,7 +13,7 @@ double Position_X(double v, double w, double x, double y, double z);// Función 
  double Position_Y(double v, double w, double x, double y, double z);// Función para determinar la posición en Y en cierto tiempo t
  double angle_1(double a);// función para pasar el angulo a radianes
 
- void Print_Position(double v, double w, double x, double y);
+ void Print_Position(double v, double w, double x, double y); //Imprime posición en X y Y según el tiempo
 int main()
 {
 
@@ -25,8 +25,6 @@ int main()
 por eso queda a decisión del usuario(por lo general es 0.5 para las esferas)
       diameter= diametro del proyectil para hallar su Àrea
       velocity_init=velocidad inicial
-      Xpos= Posición en X del proyectil en cierto tiempo
-      Ypos= Posición en Y del proyectil en cierto tiempo
       rest_k= es la variable k que define la fuerza de fricción ejercida en el proyectil
 */
     cout << "\t\t\t Projectile motion\n\n\n\n";// Título del programa
@@ -39,7 +37,7 @@ por eso queda a decisión del usuario(por lo general es 0.5 para las esferas)
     rest_k=resistance_k(cd,diameter);// rest_k toma el valor que retorna la función resistance_k
     angle1=angle_1(angle);// El ángulo ya en radianes
     cout<<"The value of K is:"<< rest_k<<endl<<endl; // Imprimir el valor de k para comparar con los resultados escritos
-Print_Position(rest_k,mass,velocity_init,angle1);
+Print_Position(rest_k,mass,velocity_init,angle1);// Función que no retorna nada, imprime a consola posición en X y Y 
 
 
     getch();// Presionar para continuar
@@ -80,7 +78,9 @@ return Y;
 
 void Print_Position(double v, double w, double x, double y){
     double Xpos,Ypos;
-    double t=0.0;
+       /*Xpos= Posición en X del proyectil en cierto tiempo
+      Ypos= Posición en Y del proyectil en cierto tiempo*/
+    double t=0.0;   // Definición de la variable t de tiempo 
     cout<<"Time"<<"\t"<<"X"<<"\t"<<"Y"<<endl;
        for (int i=0;i<70;i++){
    Sleep(1000);
@@ -89,8 +89,8 @@ void Print_Position(double v, double w, double x, double y){
       Ypos=Position_Y(v,w,x,y,t); // Se asigna a la variable Ypos el valor que retorna la función Position_X
                                                          // El valor que retorna es la posición en Y del proyectil
       if (Ypos<=0.0 && t>0.0)// if para que los valores de posición de Y no sean inferiores al piso(cuando Y<0)
-          break;
-      else
+          break; // Cuando el proyectil sea inferior al piso, sale del ciclo con e break, finalizando trayectoria del proyectil
+      else   // Si el proyectil aún no llega el piso imprime posición 
 
       cout<<t<<"\t"<< Xpos<<"\t"<< Ypos<<endl; // Imprimir la posición en x y en y en cierto tiempo t, observar que caada variable
                                        // solo queda dependiendo del tiempo
