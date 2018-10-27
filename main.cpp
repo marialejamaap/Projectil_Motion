@@ -35,19 +35,26 @@ por eso queda a decisión del usuario(por lo general es 0.5 para las esferas)
                                                           // a radianes
     cout <<" Enter the mass of projectile: "; cin>>mass;cout<<endl;// La masa de la esfera o proyectil
     cout<< " Enter the drag coeficient: "; cin>>cd;cout<<endl; // drag coeficient
-    cout <<" Enter projectile diameter: ";cin>>diameter;cout<<endl;// Diámetro de la esfera
+    cout <<" Enter projectile diameter: ";cin>>diameter;cout<<endl<<endl;// Diámetro de la esfera
     rest_k=resistance_k(cd,diameter);// rest_k toma el valor que retorna la función resistance_k
     angle1=angle_1(angle);// El ángulo ya en radianes
-    cout<<"The value of K is:"<< rest_k<<endl; // Imprimir el valor de k para comparar con los resultados escritos
+    cout<<"The value of K is:"<< rest_k<<endl<<endl; // Imprimir el valor de k para comparar con los resultados escritos
 
-    for (int t=0;t<60;t++){
+ double t=0.0;
+ cout<<"Time"<<"\t"<<"X"<<"\t"<<"Y"<<endl;
+    for (int i=0;i<70;i++){
+Sleep(1000);//Muestra la progresión del proyectil pero definida con el tiempo t=t+0.1
    Xpos= Position_X(rest_k,mass,velocity_init,angle1,t);// Se asigna a la variable Xpos el valor que retorna la función Position_X
                                                         // El valor que retorna es la posición en X del proyectil
    Ypos=Position_Y(rest_k,mass,velocity_init,angle1,t); // Se asigna a la variable Ypos el valor que retorna la función Position_X
-                                                        // El valor que retorna es la posición en Y del proyectil
-   cout << Xpos<<"\t"<<Ypos<<endl; // Imprimir la posición en x y en y en cierto tiempo t, observar que caada variable
-                                    // solo queda dependiendo del tiempo
+                                                      // El valor que retorna es la posición en Y del proyectil
+   if (Ypos<0.0 && t>0.0)// if para que los valores de posición de Y no sean inferiores al piso(cuando Y<0)
+       break;
+   else
 
+   cout<<t<<"\t"<< Xpos<<"\t"<< Ypos<<endl; // Imprimir la posición en x y en y en cierto tiempo t, observar que caada variable
+                                    // solo queda dependiendo del tiempo
+t=t+0.1;//aumentar el tiempo cada 0.1 según el tiempo va dando la posición en X y Y 
     }
 
 
@@ -84,4 +91,3 @@ c=(w/v);
 Y=(c)*(x*(sin(y))+(c*g))*(1-(exp(b*z)))-(c*g*z);//Fórmula para hallar posición en Y con resistencia en el aire
 return Y;
 }
-
