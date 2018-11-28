@@ -28,3 +28,4 @@ void MainWindow::on_m_button_clicked()
     secwindow=new secondwindow(this);
     secwindow->showMaximized();
 }
+

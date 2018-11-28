@@ -27,13 +27,11 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    secondwindow.cpp \
-    projectile.cpp
+    secondwindow.cpp
 
 HEADERS += \
         mainwindow.h \
-    secondwindow.h \
-    projectile.h
+    secondwindow.h
 
 FORMS += \
         mainwindow.ui \

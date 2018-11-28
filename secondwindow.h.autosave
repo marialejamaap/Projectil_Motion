@@ -51,6 +51,8 @@ public:
 private slots:
     void on_Out_K_textChanged();
 
+    void on_Out_K_currentCharFormatChanged(const QTextCharFormat &format);
+    
 private:
     Ui::secondwindow *ui;
    QGraphicsScene *scene=nullptr;

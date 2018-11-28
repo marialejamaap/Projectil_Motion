@@ -109,10 +109,7 @@ double Projectile::set_Ypos(double v, double w, double x, double y, double z)
     Ypos=Y;
     return Ypos;
 }
-void secondwindow::on_Out_K_textChanged()
+void secondwindow::on_Out_K_currentCharFormatChanged(const QTextCharFormat &format)
 {
-    double st;
- QString str;
- st=get_Rest_k();
- str=static_cast<ostringstream*>(&(ostringstream() << st))->str();
+    
 }
